@@ -1,24 +1,7 @@
 part of 'pages.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const HomePageContent(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +10,13 @@ class _HomePageState extends State<HomePage> {
       drawer: const CustomDrawer(),
       appBar: AppBar(
         title: Text(
-          _selectedIndex == 0
-              ? 'Home'
-              : _selectedIndex == 1
-                  ? 'Data Kelompok'
-                  : 'Bantuan',
+          'Home',
           style: whiteTextStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         backgroundColor: secondaryColor,
         elevation: 0,
       ),
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        backgroundColor: secondaryColor,
-        selectedItemColor: whiteColor,
-        unselectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.group), label: 'Data Kelompok'),
-          BottomNavigationBarItem(icon: Icon(Icons.help), label: 'Bantuan'),
-        ],
-      ),
+      body: const HomePageContent(),
     );
   }
 }
@@ -62,7 +28,6 @@ class HomePageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        // seluruh halaman bisa di-scroll
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: defaultMargin),
           child: Column(
@@ -94,13 +59,12 @@ class HomePageContent extends StatelessWidget {
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 padding: const EdgeInsets.all(10),
-                shrinkWrap: true, // ukurannya hanya sebesar konten
-                physics:
-                    const NeverScrollableScrollPhysics(), // grid sendiri non-scrollable
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   _buildGridItem(
                     context,
-                    Icons.filter_9_plus, // ikon Ganjil‑Genap
+                    Icons.filter_9_plus,
                     'Penentuan Bilangan',
                     () => Navigator.push(
                       context,
@@ -131,15 +95,14 @@ class HomePageContent extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // ukuran mengikuti konten + padding
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, size: 60, color: whiteColor),
               const SizedBox(height: 12),
               Text(
                 title,
-                textAlign:
-                    TextAlign.center, // pastikan tiap baris teks di‑center
+                textAlign: TextAlign.center,
                 style: whiteTextStyle.copyWith(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
