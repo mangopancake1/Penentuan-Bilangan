@@ -12,8 +12,8 @@ class _WellcomePageState extends State<WellcomePage> {
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPassword = true;
 
-  final String correctUsername = "mobileoke";
-  final String correctPassword = "password123";
+  final String correctUsername = "admin";
+  final String correctPassword = "admin1";
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
