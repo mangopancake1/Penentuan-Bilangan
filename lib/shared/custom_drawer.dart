@@ -11,7 +11,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: secondaryColor, // Sesuaikan warna tema
+              color: secondaryColor,
             ),
             child: const Text(
               'Menu Navigasi',
@@ -32,7 +32,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
 
-          // Ganjil / Genap
+          // Penentuan Bilangan
           ListTile(
             leading: const Icon(Icons.filter_9_plus),
             title: const Text('Penentuan Bilangan'),
@@ -42,6 +42,40 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.pop(context);
               } else {
                 Navigator.pushReplacementNamed(context, '/Penentuan Bilangan');
+              }
+            },
+          ),
+
+          const Divider(),
+
+          // Logout
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: const Text('Logout', style: TextStyle(color: Colors.red)),
+            onTap: () async {
+              bool confirm = await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Konfirmasi Logout'),
+                  content: const Text('Apakah Anda yakin ingin logout?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: const Text('Batal'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text('Logout'),
+                    ),
+                  ],
+                ),
+              );
+
+              if (confirm) {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.remove('isLoggedIn'); // Hapus status login
+                Navigator.pushReplacementNamed(
+                    context, '/login'); // Arahkan ke halaman login
               }
             },
           ),
